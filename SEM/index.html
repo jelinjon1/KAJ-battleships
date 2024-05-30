@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Battleships</title>
+
+        <link rel="stylesheet" href="./css/main.css" type="text/css" />
+    </head>
+
+    <body>
+        <div class="page-wrapper">
+            <header id="banner">
+                <h1>Battleships</h1>
+                <section class="svg-wrapper">
+                    <svg
+                        width="161"
+                        height="161"
+                        viewBox="-61 -61 122 122"
+                        id="svg"
+                    >
+                        <circle cx="0" cy="0" r="60" stroke="green" />
+                        <circle cx="0" cy="0" r="50" stroke="green" />
+                        <circle cx="0" cy="0" r="40" stroke="green" />
+                        <circle cx="0" cy="0" r="30" stroke="green" />
+                        <circle cx="0" cy="0" r="20" stroke="green" />
+                        <circle cx="0" cy="0" r="10" stroke="green" />
+                        <circle cx="0" cy="0" r="2" fill="greenyellow" />
+                        <line
+                            x1="0"
+                            y1="0"
+                            x2="60"
+                            y2="0"
+                            style="stroke: greenyellow; stroke-width: 2"
+                        >
+                            <animateTransform
+                                attributeName="transform"
+                                attributeType="XML"
+                                type="rotate"
+                                from="0 0 0"
+                                to="360 0 0"
+                                dur="1.7s"
+                                repeatCount="indefinite"
+                            />
+                        </line>
+                    </svg>
+                </section>
+            </header>
+
+            <div id="audio-player">
+                <audio controls id="audio-player-element">
+                    <source src="res/sound/music/track1.mp3" type="audio/mp3" />
+                </audio>
+                <div id="music-label">Current track</div>
+
+                <div class="audio-control-button-wrapper">
+                    <button class="audio-control-button" id="prev-button">
+                        Previous
+                    </button>
+                    <button class="audio-control-button" id="next-button">
+                        Next
+                    </button>
+                </div>
+            </div>
+
+            <section class="controls">
+                <button class="guide-open">?</button>
+                <button class="reset">Reset</button>
+                <div class="orientation-label">Not set yet</div>
+            </section>
+
+            <div id="fullscreen-wrapper">
+                <section id="game-container">
+                    <div id="player-board" class="board"></div>
+                    <div id="opponent-board" class="board"></div>
+                </section>
+
+                <div class="log-container">
+                    <div class="log" id="player-log"></div>
+                    <div class="log" id="opp-log"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="guide">
+            <div class="guide-content">
+                <button class="guide-close">Close</button>
+                <div class="tab">
+                    <button class="tablinks" id="guide-tab-button">
+                        Guide
+                    </button>
+                    <button class="tablinks" id="about-tab-button">
+                        About
+                    </button>
+                </div>
+                <div class="tab-content" id="Guide">
+                    <article>
+                        <h1>The Online Battleship Game</h1>
+                        <ol>
+                            <li>
+                                <strong>Setup:</strong> Each player has a grid,
+                                usually 10x10 squares, where they can place
+                                their ships. The ships are placed vertically or
+                                horizontally and cannot overlap or go out of
+                                bounds of the grid.
+                            </li>
+                            <li>
+                                <strong>Types of Ships:</strong> Each player has
+                                a fleet of ships, typically consisting of the
+                                following:
+                                <ul>
+                                    <li>Aircraft Carrier (5 squares)</li>
+                                    <li>Battleship (4 squares)</li>
+                                    <li>Cruiser (3 squares)</li>
+                                    <li>Submarine (3 squares)</li>
+                                    <li>Destroyer (2 squares)</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Gameplay:</strong> Players take turns
+                                calling out coordinates to try to locate and
+                                sink the opponent's ships. Coordinates are
+                                usually given as a letter and a number (e.g.,
+                                A3, F7), with letters representing the rows and
+                                numbers representing the columns.
+                            </li>
+                            <li>
+                                <strong>Hit or Miss:</strong> When a player
+                                calls out a coordinate, the opponent responds
+                                with "Hit" if the coordinate corresponds to a
+                                square occupied by one of their ships, or "Miss"
+                                if it does not.
+                            </li>
+                            <li>
+                                <strong>Sinking Ships:</strong> If a player
+                                successfully hits a ship, the opponent marks the
+                                corresponding square as a "Hit." Once all
+                                squares of a ship are hit, the ship is
+                                considered sunk, and the player announces which
+                                ship was sunk.
+                            </li>
+                            <li>
+                                <strong>End of Game:</strong> The game continues
+                                until one player has successfully sunk all of
+                                the opponent's ships. That player is declared
+                                the winner.
+                            </li>
+                        </ol>
+                    </article>
+                </div>
+                <div class="tab-content" id="About">
+                    <article>
+                        <h1>About:</h1>
+                        About: Music by Maksym Dudchyk, Dream Protocol from
+                        Pixabay
+                    </article>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script src="./js/main.js" type="module"></script>
+</html>

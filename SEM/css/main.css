@@ -1,0 +1,338 @@
+body {
+    /* Custom properties declarations */
+    --main-bg-color: rgb(0, 0, 0);
+    --main-text-color: rgb(101, 217, 99);
+    --main-button-color: rgb(168, 168, 168);
+    --main-border-color: rgb(27, 52, 33);
+    --main-ship-color:  #4f4f4f;
+
+    background-color: var(--main-bg-color);
+
+    font-family: monospace;
+    color: var(--main-text-color);
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+    min-width: 375px;
+}
+
+.svg-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+
+svg {
+    display: block;
+    justify-content: center;
+}
+
+header {
+    font-size: xx-large;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    margin-top: 20px;
+}
+
+header {
+    border: 2px solid var(--main-border-color);
+    margin-bottom: 20px;
+}
+/* ///////////////////////////// */
+#audio-player {
+    /* position: fixed; */
+    position: absolute;
+    border-radius: 25px;
+    left: -260px;
+    /* transform-origin: left; */
+    width: 300px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.64);
+    opacity: 0.5;
+    transition: all 0.5s ease, opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    z-index: 1000;
+  }
+
+  #audio-player:hover {
+    border-radius: 25px;
+    width: 300px;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0);
+    opacity: 1;
+  }
+
+  #audio-player div {
+    display: none;
+    margin-left: 10px;
+  }
+
+  #audio-player audio {
+    border-radius: 25px;
+    display: none;
+    transition: all 2s ease;
+    background-color: white;
+  }
+
+  #audio-player:hover audio {
+    display: block;
+  }
+
+  #audio-player:hover div {
+    display: block;
+  }
+
+  .audio-control-button-wrapper {
+    margin-left: 0;
+    display: flex;
+    flex-direction: row;    
+  }
+
+  .audio-control-button {
+    display: inline-block;
+    width: 140px;
+  }
+
+
+/* ///////////////////////////// */
+
+#game-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    label {
+        text-align: center;
+    }
+}
+
+.controls {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    background-color: var(--main-button-color);
+    padding: 10px;
+}
+
+.guide-open {
+    margin-right: 20px;
+}
+.guide-close {
+    background-color: rgb(82, 7, 7);
+}
+
+.orientation-label {
+    min-width: 120px;
+    padding: 10px;
+    color: white;
+    font-size: 20px;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    width: 320px;
+    height: 320px;
+    border: 1px solid var(--main-border-color);
+    margin: 10px;
+}
+
+.cell {
+    border: 1px solid rgb(0, 0, 0);
+    background-color: var(--main-button-color); /* Adjust color as needed */
+}
+
+.hit {
+    /* background-image: url('../res/explosion3.png'); Path to your explosion image */
+    /* width: 32px; */
+    /* height: 32px; */
+    background-image: url('../res/Yellow\ Effect\ Bullet\ Impact\ Explosion\ 32x32.png') ;
+    
+    background-repeat: initial;
+    background-position: -192px -160px;
+    animation: changeSprite 1.4s infinite steps(4);
+}
+
+@keyframes changeSprite {
+    100% {
+        background-position: -320px -160px;
+    }
+}
+
+.ship-outline {
+    background-color: var(--main-border-color); /* Adjust color as needed */
+}
+
+.ship {
+    background-color: var(--main-ship-color);
+}
+
+.miss {
+    background-color:  #82344f;
+}
+
+.log-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.log {
+    width: 320px;
+    padding: 0;
+    margin: 10px;
+    white-space: pre-wrap;
+    overflow-y: hidden;
+    height: 100px;
+    border: 1px solid var(--main-border-color);
+    
+    display: flex;
+    justify-content: center;
+}
+
+.reset {
+    margin-right: 20px;
+}
+
+/* ---------------------------------- */
+body.guide-visible #audio-player {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+body.guide-visible .page-wrapper {
+    filter: grayscale(100);
+    filter: blur(3px);
+    transition: all 1s;
+}
+
+.guide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    visibility: hidden;
+}
+body.guide-visible .guide {
+    visibility: visible;
+}
+
+.guide-content {
+    padding: 16px;
+    width: 70vw;
+    min-height: 400px;
+    box-sizing: content-box;
+    background-color: var(--main-bg-color);
+    border: 1px solid var(--main-border-color);
+    color: var(--main-text-color);
+    border-radius: 10px;
+
+    transform: scale(0);
+}
+
+article h1 {
+    text-align: center;
+}
+
+ol> li {
+    padding-bottom: 10px;
+}
+
+ol> li::first-letter {
+    font-size: 150%;
+    font-weight: bold;
+    float: left;
+    margin-right: 1px;
+    color: var(--main-text-color);
+}
+
+article li ul li::before {
+    content: '🚢';
+}
+
+.tab {
+    overflow: hidden;
+    /* border: 1px solid var(--main-border-color); */
+    background-color: var(--main-bg-color);
+
+    button {
+        margin-top: 10px;
+        color: var(--main-text-color);
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+    }
+  }
+
+.tab button:hover {
+    background-color: #484848;
+}
+  
+.tab button.active {
+    background-color: #626262;
+}
+
+.tab-content {
+    min-height: 400px;
+    display: none;
+    border: 1px solid var(--main-border-color);
+    padding: 0px 10px 0px 10px;
+}
+
+body.guide-visible .guide-content {
+    transform: scale(1);
+    transition: transform 0.8s ease;
+}
+
+#fullscreen-wrapper:fullscreen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .board {
+        width: 600px;
+        height: 600px;
+    }
+
+    .log {
+        width: 600px;
+        height: 200px;
+        font-size: x-large;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    #game-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .log-container {
+        display: flex;
+        flex-direction: column;
+    }
+}
