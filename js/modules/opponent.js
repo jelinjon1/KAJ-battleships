@@ -51,7 +51,7 @@ export class Opponent {
                 this.#indexes[0] += 2;
             }
         }
-        console.log(copy);
+        // console.log(copy);
         return copy;
     }
 

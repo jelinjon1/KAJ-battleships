@@ -7,6 +7,10 @@ import "./modules/radar.js";
 import "./modules/tabs.js";
 import "./modules/fullscreen.js";
 import "./modules/guide.js";
+import {
+    displayGameResults,
+    saveGameResult,
+} from "./modules/result-storage.js";
 
 // Html elements
 const playerBoard = document.querySelector("#player-board");
@@ -15,6 +19,9 @@ const orientationLabel = document.querySelector(".orientation-label");
 const resetButton = document.querySelector(".reset");
 const playerLog = document.querySelector("#player-log");
 const oppLog = document.querySelector("#opp-log");
+const usernameField = document.querySelector("#username-field");
+const cleatStorageButton = document.querySelector("#clear-storage");
+const cssStyleLink = document.querySelector("#css-style-link");
 
 // Variables, boards, player
 let game = new Game();
@@ -166,7 +173,10 @@ function handlePlayerAttack(event) {
     // If the number of hit tiles == number of ship tiles (17) => end the game (requires manual reset, allows for evaluation of game state)
     if (opponent_board.isWin()) {
         addLog("You won", true);
-        game.playerTurn = false;
+        game.endGame();
+        saveUsername();
+        saveGameResult(player.name, game.getElapsedTime() / 1000);
+        displayGameResults();
     } else {
         game.changeTurn();
         setTimeout(() => {
@@ -293,6 +303,36 @@ function resetGrid() {
     clearOutlines();
 }
 
+function saveUsername() {
+    const username = usernameField.value;
+    if (username) {
+        player.name = username;
+    }
+    console.log(player.name);
+}
+
+function clearStorage() {
+    if (confirm("Are you sure you want to delete all leaderboard entries?")) {
+        localStorage.clear();
+    } else {
+    }
+}
+
+window.addEventListener("offline", (e) => {
+    cssStyleLink.href = "./css/offline.css";
+    console.log("Enabled offline mode");
+    addLog(
+        "INFO - Entered offline mode, music player is disabled, sprites altered.",
+        true
+    );
+});
+
+window.addEventListener("online", (e) => {
+    cssStyleLink.href = "./css/main.css";
+    console.log("Enabled online mode");
+    addLog("INFO - Entered online mode, functionality back to normal.", true);
+});
+
 // add the initial log with simple guide
 addLog(
     `INTRO - Click ? button for guide,
@@ -301,12 +341,6 @@ addLog(
     true
 );
 
-const state = { page_id: 1, user_id: 5 };
-const url = "index.html";
-
-history.pushState(state, "", url);
-history.back();
-
 // Add event listeners
 opponentBoard.addEventListener("click", handlePlayerAttack);
 playerBoard.addEventListener("mouseover", showShipOutline);
@@ -314,6 +348,7 @@ playerBoard.addEventListener("mouseover", showShipOutline);
 playerBoard.addEventListener("mouseout", clearOutlines);
 
 resetButton.addEventListener("click", resetGrid);
+cleatStorageButton.addEventListener("click", clearStorage);
 playerBoard.addEventListener("contextmenu", (event) => event.preventDefault());
 
 // Initialize the game (generates the cells inside the grids)

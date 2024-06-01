@@ -71,7 +71,7 @@ header {
     }
 }
 
-  #audio-player:hover {
+  /* #audio-player:hover {
     border-radius: 25px;
     width: 300px;
     left: 0;
@@ -84,7 +84,7 @@ header {
     div {
         display: block;
     }
-}
+} */
 
 .audio-control-button-wrapper {
     margin-left: 0;
@@ -177,14 +177,7 @@ button {
 }
 
 .hit {
-    /* background-image: url('../res/explosion3.png'); Path to your explosion image */
-    /* width: 32px; */
-    /* height: 32px; */
-    background-image: url('../res/Yellow\ Effect\ Bullet\ Impact\ Explosion\ 32x32.png') ;
-    
-    background-repeat: initial;
-    background-position: -192px -160px;
-    animation: changeSprite 1.4s infinite steps(4);
+    background-color: orange;
 }
 
 @keyframes changeSprite {

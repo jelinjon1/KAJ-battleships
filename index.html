@@ -5,7 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Battleships</title>
 
-        <link rel="stylesheet" href="./css/main.css" type="text/css" />
+        <link
+            rel="stylesheet"
+            href="./css/main.css"
+            type="text/css"
+            id="css-style-link"
+        />
     </head>
 
     <body>
@@ -64,6 +69,11 @@
             </div>
 
             <section class="controls">
+                <input
+                    type="text"
+                    placeholder="username - max 10 letters"
+                    id="username-field"
+                />
                 <button class="guide-open">?</button>
                 <button class="reset">Reset</button>
                 <div class="orientation-label">Not set yet</div>
@@ -85,12 +95,16 @@
         <div class="guide">
             <div class="guide-content">
                 <button class="guide-close">Close</button>
+                <button id="clear-storage">Clear leaderboard storage</button>
                 <div class="tab">
                     <button class="tablinks" id="guide-tab-button">
                         Guide
                     </button>
                     <button class="tablinks" id="about-tab-button">
                         About
+                    </button>
+                    <button class="tablinks" id="leaderboard-tab-button">
+                        Leaderboard
                     </button>
                 </div>
                 <div class="tab-content" id="Guide">
@@ -149,11 +163,14 @@
                     </article>
                 </div>
                 <div class="tab-content" id="About">
+                    <h1>About:</h1>
                     <article>
-                        <h1>About:</h1>
-                        About: Music by Maksym Dudchyk, Dream Protocol from
-                        Pixabay
+                        Music by Maksym Dudchyk, Dream Protocol from Pixabay
                     </article>
+                </div>
+                <div class="tab-content" id="Leaderboard">
+                    <h1>Leaderboard:</h1>
+                    <table id="leaderboard-table"></table>
                 </div>
             </div>
         </div>

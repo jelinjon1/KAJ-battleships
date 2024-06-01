@@ -4,6 +4,7 @@ export class Player {
     length = null; //length of p.b.p
     lastOutlineRow = null; // Store the last outline row
     lastOutlineCol = null; // Store the last outline column
+    name = "DEFAULT";
 
     placementStage = null; //indicates if all ships have been placed yet
     #lengths = [5, 4, 3, 3, 2]; //lengths of ships

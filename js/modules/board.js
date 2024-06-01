@@ -27,7 +27,11 @@ export class Board {
 
     // Returns true if coords were shot at before
     coordsUsed(row, col) {
-        return this.#matrix[row][col] == 2 || this.#matrix[row][col] == 3;
+        try {
+            return this.#matrix[row][col] == 2 || this.#matrix[row][col] == 3;
+        } catch {
+            return false;
+        }
     }
 
     // Places ship starting at row, col
@@ -71,6 +75,9 @@ export class Board {
 
     // Places hit if ship present at [row,col], places miss otherwise
     handleAttack(row, col) {
+        if (row < 0 || col < 0) {
+            return false;
+        }
         //if ship, change to hit
         if (this.#matrix[row][col] === 1) {
             this.#matrix[row][col] = 3; //hit
