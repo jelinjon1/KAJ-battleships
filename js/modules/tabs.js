@@ -114,7 +114,6 @@ window.addEventListener("load", (e) => {
                 `#${tab.toLowerCase()}-tab-button`
             ),
         };
-        console.log(tab.toLocaleLowerCase);
         openTab(fakeEvent.currentTarget, tab, false);
     } else {
         openTab(e, "Guide", false); // Default tab
