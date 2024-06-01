@@ -12,11 +12,11 @@ function renderResults() {
     const results = JSON.parse(localStorage.getItem("gameResults")) || [];
 
     leaderboardTable.innerHTML = "";
-    leaderboardTable.innerHTML += `<tr><th>Player</th><th>Time</th></tr>`;
+    leaderboardTable.innerHTML += `<tr><th>Player</th><th>Time (s)</th></tr>`;
     results.forEach((result) => {
-        console.log(
-            `Player: ${result.player}, time: ${result.time}, Date: ${result.date}`
-        );
+        // console.log(
+        //     `Player: ${result.player}, time: ${result.time}, Date: ${result.date}`
+        // );
         leaderboardTable.innerHTML += `<tr><td>${result.player}</td><td>${result.time}</td></tr>`;
     });
 }

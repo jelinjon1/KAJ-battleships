@@ -53,6 +53,21 @@ class SoundController {
 }
 
 const soundController = new SoundController();
+let playingOnHide = false;
+
+// stops the music when website is hidden, also changes document title to grab attention
+document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+        document.title = "Come back!";
+        playingOnHide = !audioPlayer.paused;
+        audioPlayer.pause();
+    } else {
+        document.title = "Battleships";
+        if (playingOnHide) {
+            audioPlayer.play();
+        }
+    }
+});
 
 nextButton.addEventListener("click", (e) => {
     soundController.nextTrack();
