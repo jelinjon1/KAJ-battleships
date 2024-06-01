@@ -11,13 +11,14 @@
             type="text/css"
             id="css-style-link"
         />
+        <!-- <link rel="shortcut icon" href="#" /> -->
     </head>
 
     <body>
         <div class="page-wrapper">
             <header id="banner">
                 <h1>Battleships</h1>
-                <section class="svg-wrapper">
+                <div class="svg-wrapper">
                     <svg
                         width="161"
                         height="161"
@@ -49,7 +50,7 @@
                             />
                         </line>
                     </svg>
-                </section>
+                </div>
             </header>
 
             <div id="audio-player">
@@ -69,11 +70,13 @@
             </div>
 
             <section class="controls">
-                <input
-                    type="text"
-                    placeholder="username - max 10 letters"
-                    id="username-field"
-                />
+                <div class="tooltip">
+                    <input
+                        type="text"
+                        placeholder="username"
+                        id="username-field"
+                    />
+                </div>
                 <button class="guide-open">?</button>
                 <button class="reset">Reset</button>
                 <div class="orientation-label">Not set yet</div>
@@ -132,26 +135,15 @@
                             </li>
                             <li>
                                 <strong>Gameplay:</strong> Players take turns
-                                calling out coordinates to try to locate and
-                                sink the opponent's ships. Coordinates are
-                                usually given as a letter and a number (e.g.,
-                                A3, F7), with letters representing the rows and
-                                numbers representing the columns.
-                            </li>
-                            <li>
-                                <strong>Hit or Miss:</strong> When a player
-                                calls out a coordinate, the opponent responds
-                                with "Hit" if the coordinate corresponds to a
-                                square occupied by one of their ships, or "Miss"
-                                if it does not.
+                                shooting at coordinates to try to locate and
+                                sink the opponent's ships.
                             </li>
                             <li>
                                 <strong>Sinking Ships:</strong> If a player
                                 successfully hits a ship, the opponent marks the
                                 corresponding square as a "Hit." Once all
                                 squares of a ship are hit, the ship is
-                                considered sunk, and the player announces which
-                                ship was sunk.
+                                considered sunk.
                             </li>
                             <li>
                                 <strong>End of Game:</strong> The game continues
@@ -165,7 +157,7 @@
                 <div class="tab-content" id="About">
                     <h1>About:</h1>
                     <article>
-                        Music by Maksym Dudchyk, Dream Protocol from Pixabay
+                        Music by Maksym Dudchyk and Dream Protocol from Pixabay
                     </article>
                 </div>
                 <div class="tab-content" id="Leaderboard">
@@ -174,7 +166,6 @@
                 </div>
             </div>
         </div>
+        <script src="./js/main.js" type="module"></script>
     </body>
-
-    <script src="./js/main.js" type="module"></script>
 </html>

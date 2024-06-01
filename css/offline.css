@@ -5,6 +5,9 @@ body {
     --main-button-color: rgb(168, 168, 168);
     --main-border-color: rgb(27, 52, 33);
     --main-ship-color:  #4f4f4f;
+    --fullscreen-animation-y: -310px;
+    --fullscreen-animation-init-x: -360px;
+    --fullscreen-animation-end-x: -600px;
 
     background-color: var(--main-bg-color);
 
@@ -46,11 +49,10 @@ header {
 }
 
 #audio-player {
-    /* position: fixed; */
+    visibility: hidden;
     position: absolute;
     border-radius: 25px;
     left: -260px;
-    /* transform-origin: left; */
     width: 300px;
     height: 40px;
     background-color: rgba(255, 255, 255, 0.64);
@@ -70,21 +72,6 @@ header {
         background-color: white;
     }
 }
-
-  /* #audio-player:hover {
-    border-radius: 25px;
-    width: 300px;
-    left: 0;
-    background-color: rgba(255, 255, 255, 0);
-    opacity: 1;
-
-    audio {
-        display: block;
-    }
-    div {
-        display: block;
-    }
-} */
 
 .audio-control-button-wrapper {
     margin-left: 0;
@@ -173,7 +160,7 @@ button {
 
 .cell {
     border: 1px solid rgb(0, 0, 0);
-    background-color: var(--main-button-color); /* Adjust color as needed */
+    background-color: var(--main-button-color);
 }
 
 .hit {
@@ -187,7 +174,7 @@ button {
 }
 
 .ship-outline {
-    background-color: var(--main-border-color); /* Adjust color as needed */
+    background-color: var(--main-border-color);
 }
 
 .ship {
@@ -301,7 +288,6 @@ article li ul li::before {
         color: var(--main-text-color);
         background-color: inherit;
         float: left;
-        /* border: none; */
         outline: none;
         cursor: pointer;
         padding: 14px 16px;
@@ -309,7 +295,6 @@ article li ul li::before {
     }
 
     button:hover {
-        /* background-color: #484848; */
         background-color: var(--main-border-color);
     }
 
@@ -348,6 +333,19 @@ article li ul li::before {
         height: 200px;
         font-size: x-large;
     }
+
+    .hit {
+        width: 58px;
+        height: 58px;
+        background-color: orange;
+        /* background-repeat: no-repeat; */
+        /* background-position: var(--fullscreen-animation-init-x) var(--fullscreen-animation-y); */
+        /* background-size: 1200px 986px; */
+        /* image-rendering: pixelated; */
+        /* transform: scale(1.875); */
+        /* transform-origin: top left; */
+        /* animation: changeSprite2 0.7s infinite steps(4); */
+    }
 }
 
 @media screen and (max-width: 780px) {
@@ -360,4 +358,43 @@ article li ul li::before {
         display: flex;
         flex-direction: column;
     }
+}
+
+input:focus {
+    outline:none;
+    border: 2px solid var(--main-text-color);
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip input {
+    width: 162px;
+    padding: 12px 0px;
+}
+
+.tooltip:hover::before {
+    content: "Special characters (<, >, '', ') will be replaced";
+    visibility: visible;
+    opacity: 1;
+    width: 400px;
+    background-color: var(--main-border-color);
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    bottom: 125%;
+    left: 10%;
+    margin-left: -60px;
+    z-index: 1;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.tooltip::before {
+    content: "";
+    visibility: hidden;
+    opacity: 0;
 }

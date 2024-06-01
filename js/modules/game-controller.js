@@ -8,15 +8,17 @@ export class Game {
         Math.random() >= 0.5
             ? (this.playerTurn = true)
             : (this.playerTurn = false);
-        // this.playerTurn = true;
+
         this.gameStartTime = performance.now();
     }
 
+    // Ends the game, notes time
     endGame() {
         this.playerTurn = false;
         this.gameEndTime = performance.now();
     }
 
+    // Returns game elapsed time in ms
     getElapsedTime() {
         const timeElapsed = this.gameEndTime - this.gameStartTime;
         console.log(timeElapsed);

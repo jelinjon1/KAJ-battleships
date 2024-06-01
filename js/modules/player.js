@@ -4,11 +4,11 @@ export class Player {
     length = null; //length of p.b.p
     lastOutlineRow = null; // Store the last outline row
     lastOutlineCol = null; // Store the last outline column
-    name = "DEFAULT";
+    name = "DEFAULT"; //default username to prevent null username incase no username is entered
 
     placementStage = null; //indicates if all ships have been placed yet
     #lengths = [5, 4, 3, 3, 2]; //lengths of ships
-    #index = 0; //index of current ship being placed from the lengths arr
+    #index = 0; //index of current ship being placed (from the lengths arr)
 
     constructor() {
         this.orientation = "horizontal"; //default orientation

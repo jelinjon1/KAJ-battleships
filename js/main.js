@@ -6,7 +6,6 @@ import "./modules/sound.js";
 import "./modules/radar.js";
 import "./modules/tabs.js";
 import "./modules/fullscreen.js";
-import "./modules/guide.js";
 import {
     displayGameResults,
     saveGameResult,
@@ -32,11 +31,11 @@ let opponent = new Opponent(opponentBoard);
 
 // Place ships on opponents board
 function placeOpponentsShips() {
-    opponent_board.placeShip(5, 0, 0, false);
-    opponent_board.placeShip(4, 0, 1, false);
-    opponent_board.placeShip(3, 0, 2, false);
-    opponent_board.placeShip(3, 0, 3, false);
-    opponent_board.placeShip(2, 0, 4, false);
+    opponent_board.placeShip(5, 3, 0, false);
+    opponent_board.placeShip(4, 1, 1, true);
+    opponent_board.placeShip(3, 9, 2, true);
+    opponent_board.placeShip(3, 8, 7, true);
+    opponent_board.placeShip(2, 0, 9, false);
 }
 placeOpponentsShips();
 
@@ -175,7 +174,7 @@ function handlePlayerAttack(event) {
         addLog("You won", true);
         game.endGame();
         saveUsername();
-        saveGameResult(player.name, game.getElapsedTime() / 1000);
+        saveGameResult(player.name, game.getElapsedTime() / 1000); //convert to s from ms
         displayGameResults();
     } else {
         game.changeTurn();
@@ -255,15 +254,15 @@ function clearOutlines() {
 
 // Adds text = log to the appropriate status window, player = true for player, false for opponent
 function addLog(text, player) {
-    var timestamp = new Date();
+    let timestamp = new Date();
 
-    var h = timestamp.getHours();
-    var m = timestamp.getMinutes();
+    let h = timestamp.getHours();
+    let m = timestamp.getMinutes();
 
     h = h < 10 ? "0" + h : h;
     m = m < 10 ? "0" + m : m;
 
-    var time = h + ":" + m;
+    let time = h + ":" + m;
 
     if (player) {
         playerLog.textContent += time + " " + text + "\n\n";
@@ -303,14 +302,28 @@ function resetGrid() {
     clearOutlines();
 }
 
+// Saves username from text field, automatically called at game end
 function saveUsername() {
-    const username = usernameField.value;
+    let username = sanitizeHTML(usernameField.value);
+    if (username.length > 100) {
+        username = "DEFAULT";
+    }
     if (username) {
         player.name = username;
     }
     console.log(player.name);
 }
 
+function sanitizeHTML(str) {
+    return str
+        .replace(/&/g, "")
+        .replace(/</g, "")
+        .replace(/>/g, "")
+        .replace(/"/g, "")
+        .replace(/'/g, "");
+}
+
+// Clears game results from local storage
 function clearStorage() {
     if (confirm("Are you sure you want to delete all leaderboard entries?")) {
         localStorage.clear();
@@ -318,6 +331,7 @@ function clearStorage() {
     }
 }
 
+// Offline api to change css to not include local files
 window.addEventListener("offline", (e) => {
     cssStyleLink.href = "./css/offline.css";
     console.log("Enabled offline mode");
@@ -327,13 +341,14 @@ window.addEventListener("offline", (e) => {
     );
 });
 
+// Reset css to default sheet upon online event
 window.addEventListener("online", (e) => {
     cssStyleLink.href = "./css/main.css";
     console.log("Enabled online mode");
     addLog("INFO - Entered online mode, functionality back to normal.", true);
 });
 
-// add the initial log with simple guide
+// Add the initial log with simple guide
 addLog(
     `INTRO - Click ? button for guide,
     press 'space' to go fullscreen,
@@ -344,11 +359,10 @@ addLog(
 // Add event listeners
 opponentBoard.addEventListener("click", handlePlayerAttack);
 playerBoard.addEventListener("mouseover", showShipOutline);
-// playerBoard.addEventListener("mouseout", removeShipOutline);
 playerBoard.addEventListener("mouseout", clearOutlines);
-
 resetButton.addEventListener("click", resetGrid);
 cleatStorageButton.addEventListener("click", clearStorage);
+// Prevent the context menu from opening on right click, only on player board
 playerBoard.addEventListener("contextmenu", (event) => event.preventDefault());
 
 // Initialize the game (generates the cells inside the grids)

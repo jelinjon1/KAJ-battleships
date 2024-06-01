@@ -5,7 +5,7 @@ export function saveGameResult(playerName, time) {
         date: new Date().toISOString(),
     };
 
-    // Get existing results from localStorage
+    // fetch existing json entry, parse into array
     let results = JSON.parse(localStorage.getItem("gameResults")) || [];
 
     // Add new result to the array

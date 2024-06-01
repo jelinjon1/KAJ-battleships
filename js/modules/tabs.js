@@ -7,6 +7,7 @@ const leaderboardTable = document.querySelector("#leaderboard-table");
 
 let guideVisible = false;
 
+//fetch and parse results, add html elements to leaderboard table
 function renderResults() {
     const results = JSON.parse(localStorage.getItem("gameResults")) || [];
 
@@ -43,7 +44,6 @@ function openTab(target, tabName, pushState = true) {
     document.getElementById(linkName).className += " active";
 
     if (pushState) {
-        // Push state to history
         history.pushState(
             { guideVisible: true, tab: tabName },
             `Tab: ${tabName}`,
